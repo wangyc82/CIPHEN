@@ -46,36 +46,44 @@ Adp (adjacent matrix representing the interactions between known ligands and the
 App (adjacent matrix representing PPI interactions)
 
 take example data for instance
- > load('~/CPIHN/example.RData')
+
+   > load('~/CPIHN/example.RData')
+
 example data includes the MACCs fingerprints for new compounds and known ligands, MACCs.fp.mat.chembl and new.chem.MACCs.mat
 adjacent matrix representing ligands and their recptors,comp_tar_mat2
 adjacent matrix representing PPI interaction, PPI_adj_mat
 
 preparing Acd
-sim.MACCs.mat.new<-matrix(0,nrow(new.chem.MACCs.mat),nrow(MACCs.fp.mat.chembl))
-rownames(sim.MACCs.mat.new)<-rownames(new.chem.MACCs.mat)
-colnames(sim.MACCs.mat.new)<-rownames(MACCs.fp.mat.chembl)
- > for (i in 1:nrow(new.chem.MACCs.mat)) {
- >   for (j in 1:nrow(MACCs.fp.mat.chembl)) {
- >     sim.MACCs.mat.new[i,j]<-fpSim(new.chem.MACCs.mat[i,], MACCs.fp.mat.chembl[j,], method="Tanimoto")
- >      }
- >     }
-> Acd.full<-matrix(0,nrow(sim.MACCs.mat.new),nrow(MACCs.fp.mat.chembl))
-> rownames(Acd.full)<-rownames(sim.MACCs.mat.new)
-> colnames(Acd.full)<-colnames(sim.MACCs.mat.new)
-> Acd.full[which(sim.MACCs.mat.new>=0.3)]<-1 #threshold 0.3 determined by the distribution of as.vector(sim.MACCs.mat.new) and make sure length(which(rowSums(Acd.full)==0))==0
-> Acd<-Acd.full[,which(colSums(Acd.full)!=0)]
+
+   > sim.MACCs.mat.new<-matrix(0,nrow(new.chem.MACCs.mat),nrow(MACCs.fp.mat.chembl))
+   > rownames(sim.MACCs.mat.new)<-rownames(new.chem.MACCs.mat)
+   > colnames(sim.MACCs.mat.new)<-rownames(MACCs.fp.mat.chembl)
+   > for (i in 1:nrow(new.chem.MACCs.mat)) {
+   >   for (j in 1:nrow(MACCs.fp.mat.chembl)) {
+   >     sim.MACCs.mat.new[i,j]<-fpSim(new.chem.MACCs.mat[i,], MACCs.fp.mat.chembl[j,], method="Tanimoto")
+   >      }
+   >     }
+
+   > Acd.full<-matrix(0,nrow(sim.MACCs.mat.new),nrow(MACCs.fp.mat.chembl))
+   > rownames(Acd.full)<-rownames(sim.MACCs.mat.new)
+   > colnames(Acd.full)<-colnames(sim.MACCs.mat.new)
+   > Acd.full[which(sim.MACCs.mat.new>=0.3)]<-1
+
+threshold 0.3 determined by the distribution of as.vector(sim.MACCs.mat.new) and make sure length(which(rowSums(Acd.full)==0))==0
+   > Acd<-Acd.full[,which(colSums(Acd.full)!=0)]
 
 prepare Adp
-> Adp.full<-comp_tar_mat2[colnames(Acd),intersect(colnames(comp_tar_mat2),rownames(PPI_adj_mat))]
-> Adp<-Adp.full[which(rowSums(Adp.full)!=0),]
-> Adp<-Adp[,which(colSums(Adp)!=0)]
-> Acd<-Acd[,rownames(Adp)]
+
+     > Adp.full<-comp_tar_mat2[colnames(Acd),intersect(colnames(comp_tar_mat2),rownames(PPI_adj_mat))]
+     > Adp<-Adp.full[which(rowSums(Adp.full)!=0),]
+     > Adp<-Adp[,which(colSums(Adp)!=0)]
+     > Acd<-Acd[,rownames(Adp)]
 
 prepare App
-> App.full<-PPI_adj_mat[colnames(Adp),]
-> App<-App.full[,-which(is.na(colnames(App.full)))]
-> App<-App[,which(colSums(App)!=0)]
+
+    > App.full<-PPI_adj_mat[colnames(Adp),]
+    > App<-App.full[,-which(is.na(colnames(App.full)))]
+    > App<-App[,which(colSums(App)!=0)]
 
 make sure compound and protein name has no any delimeter
 
