@@ -26,7 +26,7 @@ Early prediction of compound-protein interactions (CPIs) is a critical step in d
 
     - step 1: git clone https://github.com/wangyc82/CPIHN;
 
-    - step 2: download the example data (combination_data.RData) from https://wanglab.shinyapps.io/DeepDRK/, and put it in the CPIHN folder.
+    - step 2: download the example data (exampleData.RData) from CPIHN repository, and put it in the CPIHN folder.
 
     Dependencies of CPIHN includes the following: 
 
@@ -47,7 +47,7 @@ App (adjacent matrix representing PPI interactions)
 
 take example data for instance
 
-     > load('~/CPIHN/example.RData')
+     > load('~/CPIHN/exampleData.RData')
 
 example data includes the MACCs fingerprints for new compounds and known ligands, MACCs.fp.mat.chembl and new.chem.MACCs.mat
 adjacent matrix representing ligands and their recptors,comp_tar_mat2
@@ -97,7 +97,7 @@ The main function of DeepDRK is DeepDRKpredictor.R. Get your input files prepare
 Usage example:
 
     > source('~/CPIHN/CPIHN.R')
-    > predictions<-CPIHN(Acd,Adp,App)
+    > predictions<-CPIHN(Acd,Adp,App,len1,len2,len3,len4,len5)
     
 In the following, we will show how to get MACCs fingerprints from compund sdf file
 
