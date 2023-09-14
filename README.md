@@ -88,7 +88,8 @@ prepare App
 make sure compound and protein name has no any delimeter
 
 set len1, len2, len3, len4, len5 accoding the dimension of Acd, Adp, App
-for this example case, we set len1=10000;len2=100000;len3=1e6;len4=1e+7;len5=1e+8;
+
+For this example data, set len1=10000;len2=100000;len3=1e6;len4=1e+7;len5=1e+8;
 
 3. Running CPIHN
 
