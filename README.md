@@ -1,6 +1,6 @@
-**CPIHN** 
+**CIPHEN** 
 
-**C**ompound-**D**rug **I**nteraction using **H**eterogeneous **N**etwork. 
+**C**ompound-protein **i**nteraction **p**rediction based on **H**eterogeneous **N**etwork. 
 
 # Status
 
@@ -8,13 +8,13 @@ Active development
 
 # Introduction
 
-Early prediction of compound-protein interactions (CPIs) is a critical step in drug discovery. Among various obstacles hindering clinical translation, lacking effective methods for multi-type network integration has become a bottleneck. CPIHN detected CPIs across the entire human protein space through integrating protein-protein interaction (PPI) network into a heterogeneous network (HN).
+Early prediction of compound-protein interactions (CPIs) is a critical step in drug discovery. Among various obstacles hindering clinical translation, lacking effective methods for multi-type network integration has become a bottleneck. CIPHEN detected CPIs across the entire human protein space through integrating protein-protein interaction (PPI) network into a heterogeneous network (HN).
 
 # Usage
 
 1. Installation
 
-   Prerequisites of DeepDRK includes the following: 
+   Prerequisites of CIPHEN includes the following: 
 
    - R is properly installed; 
 
@@ -24,11 +24,11 @@ Early prediction of compound-protein interactions (CPIs) is a critical step in d
 
     Installation of DeepDR includes the following steps:
 
-    - step 1: git clone https://github.com/wangyc82/CPIHN;
+    - step 1: git clone https://github.com/wangyc82/CIPHEN;
 
-    - step 2: download the example data (exampleData.RData) from CPIHN repository, and put it in the CPIHN folder.
+    - step 2: download the example data (exampleData.RData) from CIPHEN repository, and put it in the CIPHEN folder.
 
-    Dependencies of CPIHN includes the following: 
+    Dependencies of CIPHEN includes the following: 
 
     - word2vec package and its dependencies.
     - randomForest package and its dependencies.
@@ -47,7 +47,7 @@ App (adjacent matrix representing PPI interactions)
 
 take example data for instance
 
-     > load('~/CPIHN/exampleData.RData')
+     > load('~/CIPHEN/exampleData.RData')
 
 example data includes the MACCs fingerprints for new compounds and known ligands, MACCs.fp.mat.chembl and new.chem.MACCs.mat
 adjacent matrix representing ligands and their recptors,comp_tar_mat2
@@ -91,20 +91,20 @@ set len1, len2, len3, len4, len5 accoding the dimension of Acd, Adp, App
 
 For this example data, set len1=10000;len2=100000;len3=1e6;len4=1e+7;len5=1e+8;
 
-3. Running CPIHN
+3. Running CIPHEN
 
 The main function of DeepDRK is DeepDRKpredictor.R. Get your input files prepared, and run it like this:
 
 Usage example:
 
-    > source('~/CPIHN/CPIHN.R')
-    > predictions<-CPIHN(Acd,Adp,App,len1,len2,len3,len4,len5)
+    > source('~/CIPHEN/CIPHEN.R')
+    > predictions<-CIPHEN(Acd,Adp,App,len1,len2,len3,len4,len5)
     
 In the following, we will show how to get MACCs fingerprints from compund sdf file
 
     > library(ChemmineR)
     > library(ChemmineOB)
-    > compounds<-read.SDFset("~/CPIHN/compounds.sdf")
+    > compounds<-read.SDFset("~/CIPHEN/compounds.sdf")
     > MACCs.fp.mat<-fingerprintOB(compounds,"MACCS")@fpma
 
 
