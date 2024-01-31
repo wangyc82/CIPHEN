@@ -35,7 +35,7 @@
 
 # set len1, len2, len3, len4, len5 accoding the dimension of Acd, Adp, App
 # for this example case, we set len1=10000;len2=100000;len3=1e6;len4=1e+7;len5=1e+8;
-CPIHN<-function(Acd, Adp, App,len1,len2,len3,len4,len5) {
+CIPHEN<-function(Acd, Adp, App,len1,len2,len3,len4,len5) {
   Cd<-lapply(1:nrow(Acd), function(x) colnames(Acd)[which(Acd[x,]==1)])
   names(Cd)<-rownames(Acd)
   Dc<-lapply(1:ncol(Acd), function(x) rownames(Acd)[which(Acd[,x]==1)])
